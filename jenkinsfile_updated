@@ -46,7 +46,7 @@ pipeline {
             }
         } 
     
-             stage('IMAGE SCANNING') {
+             stage('IMAGE SCAN') {
             steps {
                 sh "trivy image --format table -o trivy-image-report.html vikicr7/game:latest "
             }
