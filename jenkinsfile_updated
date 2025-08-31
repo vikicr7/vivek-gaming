@@ -46,11 +46,15 @@ pipeline {
             }
         } 
     
-             stage('IMAGE SCAN') {
-            steps {
-                sh "trivy image --format table -o trivy-image-report.html vikicr7/game:latest "
-            }
-        }   
+stage('IMAGE SCAN') {
+    steps {
+        sh '''
+            export TRIVY_CACHE_DIR=/var/lib/jenkins/trivy-cache
+            trivy image --format table -o trivy-image-report.html vikicr7/game:latest
+        '''
+    }
+}
+  
             
         stage('DOCKER DEPLOYMENT') {
             steps {
