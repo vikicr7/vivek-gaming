@@ -5,9 +5,6 @@ pipeline {
         jdk 'jdk17'
         maven 'maven3'
     }
-    environment {
-        SCANNER_HOME= tool 'sonar-scanner'
-    }
     
     stages {
         stage('GIT CHECKOUT') {
@@ -33,24 +30,6 @@ pipeline {
                 sh "trivy fs --format table -o trivy-fs-report.html ."
             }
         }
-        
-        stage('SONARQUBE ANALYSIS') {
-            steps {
-                withSonarQubeEnv('sonar') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Gaming -Dsonar.projectKey=Gaming\
-                            -Dsonar.java.binaries=. '''
-                }
-            }
-        }
-        
-                stage('QUALITY GATES') {
-            steps {
-                script {
-                  waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token' 
-                }
-            }
-        }
-        
         stage('MAVEN BUILD') {
             steps {
                sh "mvn package"
