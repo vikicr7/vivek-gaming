@@ -7,7 +7,7 @@ pipeline {
     }
     
     stages {
-        stage('GIT CHECKOUT') {
+        stage('GIT CHECKOU') {
             steps {
                git branch: 'main', url: 'https://github.com/vikicr7/vivek-gaming.git'
             }
