@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('GIT CHECKOUT') {
             steps {
-               git branch: 'main', url: 'https://github.com/vikicr7/Vivek-s-Gaming-Application.git'
+               git branch: 'main', url: 'https://github.com/vikicr7/vivek-gaming.git'
             }
         }
     
